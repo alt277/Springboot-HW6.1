@@ -3,7 +3,7 @@ package ru.geekbrains.persist.repo;
 
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.persist.entity.Customer;
-import ru.geekbrains.persist.entity.Product;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
