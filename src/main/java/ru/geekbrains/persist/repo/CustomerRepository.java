@@ -12,21 +12,23 @@ import java.util.List;
 
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Integer>  {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-   @Query("select c from Customer c where c.firstName = :firstName  ")
-   List<Customer> findByName(@Param("firstName") String firstName);
+    @Query("select c from Customer c where c.firstName = :firstName  ")
+    List<Customer> findByName(@Param("firstName") String firstName);
 
-   @Query("select c from Customer c where c.firstName = 'Alex'  ")
-   List<Customer> findByName2();
+    @Query("select c from Customer c where c.firstName = 'Alex'  ")
+    List<Customer> findByName2();
 
-   @Query("select c from Customer c where (c.firstName = :firstName ) or" +
-           "(c.familyName = :familyName )")
-   List<Customer> findByNameAndFamily_name(@Param("firstName") String firstName, @Param("familyName") String familyName ) ;
+    @Query("select c from Customer c where (c.firstName = :firstName ) or" +
+            "(c.familyName = :familyName )")
+    List<Customer> findByNameAndFamily_name(@Param("firstName") String firstName, @Param("familyName") String familyName);
 
-   @Query("select p from Product p where  p.title=:title or p.title is null")
-   List<Product> findByQueryTitle(@Param("title") String title);
+    @Query("select p from Product p where  p.title=:title or p.title is null")
+    List<Product> findByQueryTitle(@Param("title") String title);
 
+    @Query("delete from Customer c where  c.firstName=:firstName ")
+    void deleteByFirst_name(@Param("firstName") String firstName);
 
 }
 

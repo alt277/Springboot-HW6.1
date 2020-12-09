@@ -1,0 +1,29 @@
+GET http://localhost:8380/my-app/api/v1/customers/all
+###
+GET http://localhost:8380/my-app/api/v1/customers/Alex/name
+###
+GET http://localhost:8380/my-app/api/v1/customers/idName/
+###
+POST http://localhost:8380/my-app/api/v1/customers
+Content-Type: application/json
+
+{
+
+  "first_name": "John",
+  "family_name": "Montana"
+}
+###
+PUT http://localhost:8380/my-app/api/v1/customers
+Content-Type: application/json
+
+{
+  "id": 51,
+ "first_name": "Gogi",
+ "family_name": "Loshidze2"
+}
+###
+
+DELETE http://localhost:8380/my-app/api/v1/customers/49
+###
+DELETE http://localhost:8380/my-app/api/v1/customers/Dima/first_name
+###
