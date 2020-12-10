@@ -32,46 +32,49 @@ public class CustomerController {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private  CustomerRepo customerRepo;
+    private CustomerRepo customerRepo;
 
     @GetMapping
     public String all(Model model,
-                              @RequestParam(value = "firstName", required = false) String firstName,
-                              @RequestParam(value = "familyName", required = false) String familyName,
-                              @RequestParam("page") Optional<Integer> page,
-                              @RequestParam("size") Optional<Integer> size       ) {
+                      @RequestParam(value = "firstName", required = false) String firstName,
+                      @RequestParam(value = "familyName", required = false) String familyName,
+                      @RequestParam("page") Optional<Integer> page,
+                      @RequestParam("size") Optional<Integer> size) {
 
-            logger.info("Filtering by name: {}", firstName);
+        logger.info("Filtering by name: {}", firstName);
         List<Customer> customerList;
 
         if ((firstName == null || firstName.isEmpty()) && (familyName == null || familyName.isEmpty())) {
-           customerList = customerService.findAll();
-        }
-        else{
-            customerList = customerService.findByNameAndFamily_name(firstName,familyName);
+            customerList = customerService.findAll();
+        } else {
+            customerList = customerService.findByNameAndFamily_name(firstName, familyName);
 
         }
         model.addAttribute("customers", customerList);
         return "customers";
     }
+
     @GetMapping("/new_customer")
-    public String addCustomer( Model model ) {
+    public String addCustomer(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "new_customer";
     }
+
     @GetMapping("/{id}")
     public String editCustomer(@PathVariable("id") Integer id, Model model) throws Exception {
         Customer customer = customerRepository.findById(id).orElseThrow(Exception::new);
         model.addAttribute("customer", customer);
         return "edit_customer";
     }
+
     @PostMapping("/new")
     public String addCustomer(Model model, Customer customer, BindingResult bindingResult) {
-       customerService.save(customer);
+        customerService.save(customer);
 
-       return "redirect:/customers";
+        return "redirect:/customers";
     }
+
     @PostMapping("/update")
     public String updateCustomer(Model model, Customer customer, BindingResult bindingResult) {
         customerService.save(customer);
@@ -80,15 +83,13 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}/delete")
-    public String deleteUser(@PathVariable("id") Integer id,Model model) {
+    public String deleteUser(@PathVariable("id") Integer id, Model model) {
         customerService.deleteById(id);
 
         return "redirect:/customers";
     }
 
 
-
-
-    }
+}
 
 

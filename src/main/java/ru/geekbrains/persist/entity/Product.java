@@ -1,4 +1,7 @@
 package ru.geekbrains.persist.entity;
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.geekbrains.persist.entity.views.ProductView;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,16 +16,20 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonView(ProductView.Id.class)
     private Integer id;
 
     @Column(name = "title")
+    @JsonView(ProductView.FullProduct.class)
     private String title;
 
     @Column(name = "price")
+    @JsonView(ProductView.FullProduct.class)
     private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonView(ProductView.IdNamePrceCategory.class)
     private  Category category;
 
     @ManyToMany

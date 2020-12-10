@@ -14,11 +14,11 @@ import ru.geekbrains.persist.entity.Product;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository  extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
+public interface CategoryRepository extends JpaRepository<Product, Integer>, JpaSpecificationExecutor<Product> {
 
 
     @Query("  SELECT p  FROM Product as p " +
-            " join Category as c on p.id=c.id "+
+            " join Category as c on p.id=c.id " +
             "where c.title =:title")
     List<Product> findCategoryByTitle(@Param("title") String title);
 

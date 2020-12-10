@@ -1,0 +1,38 @@
+GET http://localhost:8380/my-app/customers/api/v1/allCustomersId
+###
+GET http://localhost:8380/my-app/customers/api/v1/wholeCustomer
+###
+GET http://localhost:8380/my-app/products/api/v1/productsAndCategory
+###
+GET http://localhost:8380/my-app/products/api/v1/allProducts
+###
+GET http://localhost:8380/my-app/products/api/v1/allProducts
+###
+GET http://localhost:8380/my-app/customers/api/v1/Alex/name
+###
+GET http://localhost:8380/my-app/customers/api/v1/familyName
+###
+
+POST http://localhost:8380/my-app/customers/api/v1
+Content-Type: application/json
+
+{
+
+  "first_name": "John",
+  "family_name": "Montana"
+}
+###
+PUT http://localhost:8380/my-app/customers/api/v1
+Content-Type: application/json
+
+{
+  "id": 51,
+ "first_name": "Gogi",
+ "family_name": "Loshidze2"
+}
+###
+
+DELETE http://localhost:8380/my-app/customers/api/v1/49
+###
+DELETE http://localhost:8380/my-app/api/v1/customers/Dima/first_name
+###
