@@ -1,10 +1,19 @@
-GET http://localhost:8380/my-app/api/v1/customers/all
+GET http://localhost:8380/my-app/customers/api/v1/allCustomersId
 ###
-GET http://localhost:8380/my-app/api/v1/customers/Alex/name
+GET http://localhost:8380/my-app/customers/api/v1/wholeCustomer
 ###
-GET http://localhost:8380/my-app/api/v1/customers/idName/
+GET http://localhost:8380/my-app/products/api/v1/productsAndCategory
 ###
-POST http://localhost:8380/my-app/api/v1/customers
+GET http://localhost:8380/my-app/products/api/v1/allProducts
+###
+GET http://localhost:8380/my-app/products/api/v1/allProducts
+###
+GET http://localhost:8380/my-app/customers/api/v1/Alex/name
+###
+GET http://localhost:8380/my-app/customers/api/v1/familyName
+###
+
+POST http://localhost:8380/my-app/customers/api/v1
 Content-Type: application/json
 
 {
@@ -13,7 +22,7 @@ Content-Type: application/json
   "family_name": "Montana"
 }
 ###
-PUT http://localhost:8380/my-app/api/v1/customers
+PUT http://localhost:8380/my-app/customers/api/v1
 Content-Type: application/json
 
 {
@@ -23,7 +32,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:8380/my-app/api/v1/customers/49
+DELETE http://localhost:8380/my-app/customers/api/v1/49
 ###
 DELETE http://localhost:8380/my-app/api/v1/customers/Dima/first_name
 ###
