@@ -8,52 +8,57 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ties")
-public class Ties{
-@Id
-@Column
-private Integer id;
+public class Ties {
+    @Id
+    @Column
+    private Integer id;
 
-@Column
-private Integer productId;
+    @Column
+    private Integer productId;
 
-@Column
-private Integer customerId;
+    @Column
+    private Integer customerId;
 
-public Ties(){};
-public Ties(Integer id, Integer customerId, Integer productId){
-this.id=id;
-this.customerId = customerId;
-this.productId = productId;
-}
+    public Ties() {
+    }
 
-public void setId(Integer id) {
-this.id = id;
-}
 
-public Integer getId() {
-return id;
-}
+    public Ties(Integer id, Integer customerId, Integer productId) {
+        this.id = id;
+        this.customerId = customerId;
+        this.productId = productId;
+    }
 
-public Integer getCustomerId() {
-return customerId;
-}
-public void setCustomerId(Integer customer_id) {
-this.customerId = customer_id;
-}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-public Integer getProductId() {
-return productId;
-}
-public void setProductId(Integer product_id) {
-this.productId = product_id;
-}
+    public Integer getId() {
+        return id;
+    }
 
-@Override
-public String toString() {
-return "Ties{" +
-"id=" + id +
-", product_id=" + productId +
-", customer_id=" + customerId +
-'}';
-}
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customer_id) {
+        this.customerId = customer_id;
+    }
+
+    public Integer getProductId() { return productId; }
+
+    public void setProductId(Integer product_id) {
+        this.productId = product_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Ties{" +
+                "id=" + id +
+                ", product_id=" + productId +
+                ", customer_id=" + customerId +
+                '}';
+    }
+
+
 }

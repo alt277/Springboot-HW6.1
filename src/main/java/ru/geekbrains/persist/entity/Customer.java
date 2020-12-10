@@ -1,5 +1,9 @@
 package ru.geekbrains.persist.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.geekbrains.persist.entity.views.CommonView;
+import ru.geekbrains.persist.entity.views.CustomerView;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,12 +14,15 @@ import java.util.List;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @JsonView(CommonView.Id.class)
     private Integer id;
 
     @Column(name = "firstName")
-    private String firstName;
+    @JsonView(CustomerView.FullCustomer.class)  // дает возможность вывода поля в rest запросе
+    private String firstName;           // если в контроллере стоит такая же аннотация
 
     @Column(name = "familyName")
+    @JsonView(CustomerView.IdName.class)
     private String familyName;
 
     @ManyToMany

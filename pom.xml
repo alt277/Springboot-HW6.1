@@ -11,7 +11,7 @@
     <groupId>ru.geekbrains</groupId>
     <artifactId>springboot6hw</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot6hw</name>
+    <name>springboot7hw</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
