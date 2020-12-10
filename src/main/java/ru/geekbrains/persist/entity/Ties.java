@@ -59,4 +59,6 @@ public class Ties {
                 ", customer_id=" + customerId +
                 '}';
     }
+
+
 }
