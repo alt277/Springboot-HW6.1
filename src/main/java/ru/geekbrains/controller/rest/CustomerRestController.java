@@ -1,7 +1,6 @@
 package ru.geekbrains.controller.rest;
 
 
-
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,13 +36,13 @@ public class CustomerRestController {
     }
 
     @GetMapping(path = "/allCustomersId", produces = "application/json")
-                                      //   @JsonView(CommonView.Id.class)  вызов из родительского класса
+    //   @JsonView(CommonView.Id.class)  вызов из родительского класса
     @JsonView(CustomerView.Id.class)   //  то же - вызов из  наследника
     public List<Customer> findAll() {
         return customerService.findAll();
     }
 
-    @GetMapping(path = "/byId", produces = "application/json")
+    @GetMapping(path = "/byId/{id}", produces = "application/json")
     public Customer findById(@PathVariable("id") int id) {
         return customerRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
@@ -101,13 +100,20 @@ public class CustomerRestController {
     public List<CustomerDTO> customerData() {
         return customerFacade.getAllCustomerDTO();
     }
-
+                   //  c использоавнием простой перекачки
     @GetMapping(value = "/jsonData/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public CustomerDTO customerDTOtoJson(
             @PathVariable Integer id
     ) {
         return customerFacade.getCustomerById(id);
+    }
+                       //  с использованием репозитория
+    @GetMapping(value = "/jsonData2/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public CustomerDTO customerDTOtoJson2 (@PathVariable Integer id) {
+
+        return customerFacade.getCustomerDataByIdFromRepo(id);
     }
 
     @GetMapping(path = "/{name}/name", produces = "application/json")
