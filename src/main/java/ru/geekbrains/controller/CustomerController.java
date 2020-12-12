@@ -1,20 +1,17 @@
 package ru.geekbrains.controller;
 
-import ru.geekbrains.controller.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import ru.geekbrains.persist.entity.Customer;
-import ru.geekbrains.persist.repo.CustomerRepository;
-import ru.geekbrains.persist.repo.ProductRepository;
-import ru.geekbrains.persist.repo.CustomerRepo;
-import ru.geekbrains.persist.services.CustomerService;
+import ru.geekbrains.entity.Customer;
+import ru.geekbrains.repo.CustomerRepo;
+import ru.geekbrains.repo.CustomerRepository;
+import ru.geekbrains.repo.ProductRepository;
+import ru.geekbrains.services.CustomerService;
 
 import java.util.List;
 import java.util.Optional;

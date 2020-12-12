@@ -6,7 +6,11 @@ GET http://localhost:8380/my-app/products/api/v1/productsAndCategory
 ###
 GET http://localhost:8380/my-app/products/api/v1/allProducts
 ###
-GET http://localhost:8380/my-app/products/api/v1/allProducts
+GET http://localhost:8380/my-app/customers/api/v1/jsonData/5
+###
+GET http://localhost:8380/my-app/customers/api/v1/jsonData
+###
+GET http://localhost:8380/my-app/customers/api/v1/jsonData2
 ###
 GET http://localhost:8380/my-app/customers/api/v1/Alex/name
 ###

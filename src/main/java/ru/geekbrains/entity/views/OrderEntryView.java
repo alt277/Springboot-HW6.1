@@ -1,4 +1,4 @@
-package ru.geekbrains.persist.entity.views;
+package ru.geekbrains.entity.views;
 
 public final class OrderEntryView extends CommonView {
 

@@ -1,12 +1,12 @@
-package ru.geekbrains.persist.services;
+package ru.geekbrains.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.persist.entity.Product;
-import ru.geekbrains.persist.repo.ProductRepo;
-import ru.geekbrains.persist.repo.ProductRepository;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.repo.ProductRepo;
+import ru.geekbrains.repo.ProductRepository;
 
 import java.util.List;
 import java.util.Optional;

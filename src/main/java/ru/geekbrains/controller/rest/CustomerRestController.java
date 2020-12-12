@@ -1,6 +1,6 @@
-package ru.geekbrains.rest;
+package ru.geekbrains.controller.rest;
 
-//import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.controller.NotFoundException;
-import ru.geekbrains.persist.entity.Customer;
-import ru.geekbrains.persist.entity.views.CommonView;
-import ru.geekbrains.persist.entity.views.CustomerView;
-import ru.geekbrains.persist.repo.CustomerRepository;
-import ru.geekbrains.persist.services.CustomerService;
+import ru.geekbrains.data.CustomerDTO;
+import ru.geekbrains.entity.Customer;
+import ru.geekbrains.entity.views.CustomerView;
+import ru.geekbrains.facade.CustomerFacade;
+import ru.geekbrains.repo.CustomerRepository;
+import ru.geekbrains.services.CustomerService;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -21,21 +22,23 @@ import java.util.List;
 
 @RequestMapping("/customers/api/v1")
 
-@RestController  // автоматически проставляет @ResponseBody над всеми методами контроллера
+@RestController
 public class CustomerRestController {
 
     private final CustomerRepository customerRepository;
     private final CustomerService customerService;
+    private CustomerFacade customerFacade;
 
     @Autowired
-    public CustomerRestController(CustomerService customerService, CustomerRepository customerRepository) {
+    public CustomerRestController(CustomerService customerService, CustomerRepository customerRepository, CustomerFacade customerFacade) {
         this.customerService = customerService;
         this.customerRepository = customerRepository;
+        this.customerFacade = customerFacade;
     }
 
-    @GetMapping(path = "/allCustomersId", produces = "application/json")   // выдаст все ID покупателей
-              //   @JsonView(CommonView.Id.class)  вызов из родительского класса
-    @JsonView(CustomerView.Id.class)   //  то же -вызов из  наследника
+    @GetMapping(path = "/allCustomersId", produces = "application/json")
+                                      //   @JsonView(CommonView.Id.class)  вызов из родительского класса
+    @JsonView(CustomerView.Id.class)   //  то же - вызов из  наследника
     public List<Customer> findAll() {
         return customerService.findAll();
     }
@@ -54,17 +57,11 @@ public class CustomerRestController {
     }
 
 
-
     @GetMapping(value = "/familyName", produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonView(CustomerView.IdName.class)     // если не ограничить view вытянет рукурсивно  все
-    @ResponseBody                         // зависимости между тадлицами в БД и может быть OVERFLOW
+    @ResponseBody                         // зависимости между таблицами в БД и может быть OVERFLOW
     public List<Customer> customerFamilyToJson() {
         return customerService.findAll();
-    }
-
-    @GetMapping(path = "/{name}/name", produces = "application/json")
-    public List<Customer> findByName(@PathVariable("name") String name) {
-        return customerService.findByName(name);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
@@ -94,6 +91,29 @@ public class CustomerRestController {
         customerRepository.deleteByFirst_name(first_name);
     }
 
+    @GetMapping(value = "/jsonData", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<CustomerDTO> customerDataToJson() {
+        return customerFacade.getAllCustomerDataFromRepo();
+    }
+
+    @GetMapping(value = "/jsonData2", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CustomerDTO> customerData() {
+        return customerFacade.getAllCustomerDTO();
+    }
+
+    @GetMapping(value = "/jsonData/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public CustomerDTO customerDTOtoJson(
+            @PathVariable Integer id
+    ) {
+        return customerFacade.getCustomerById(id);
+    }
+
+    @GetMapping(path = "/{name}/name", produces = "application/json")
+    public List<Customer> findByName(@PathVariable("name") String name) {
+        return customerService.findByName(name);
+    }
 
     @ExceptionHandler
     public ResponseEntity<String> illegalArgumentExceptionHandler(IllegalArgumentException ex) {
@@ -101,7 +121,9 @@ public class CustomerRestController {
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> sqlIntegrityConstraintViolationExceptionHandler(SQLIntegrityConstraintViolationException ex) {
+    public ResponseEntity<String> sqlIntegrityConstraintViolationExceptionHandler
+            (SQLIntegrityConstraintViolationException ex) {
         return new ResponseEntity<>(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

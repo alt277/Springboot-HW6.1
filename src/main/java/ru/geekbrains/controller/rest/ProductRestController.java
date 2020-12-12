@@ -1,4 +1,4 @@
-package ru.geekbrains.rest;
+package ru.geekbrains.controller.rest;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.domain.PageRequest;
@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.persist.entity.Product;
-import ru.geekbrains.persist.entity.views.ProductView;
-import ru.geekbrains.persist.services.ProductService;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.entity.views.ProductView;
+import ru.geekbrains.services.ProductService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +32,7 @@ public class ProductRestController {
         return productService.findAll();
     }
 
-    @GetMapping(value = "/productsAndCategory", produces =  MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/productsAndCategory", produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonView(ProductView.IdNamePrceCategory.class)
     public List<Product> products() {
         return productService.findAll();
@@ -42,8 +42,6 @@ public class ProductRestController {
     public List<Product> productsToJson() {
         return productService.findAll();
     }
-
-
 
 
     @GetMapping(value = "/id", produces = MediaType.APPLICATION_JSON_VALUE)

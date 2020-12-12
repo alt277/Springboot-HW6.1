@@ -1,8 +1,7 @@
-package ru.geekbrains.persist.repo;
+package ru.geekbrains.repo;
 
 import org.springframework.data.jpa.domain.Specification;
-import ru.geekbrains.persist.entity.Product;
-import ru.geekbrains.persist.entity.Category;
+import ru.geekbrains.entity.Category;
 
 import java.math.BigDecimal;
 

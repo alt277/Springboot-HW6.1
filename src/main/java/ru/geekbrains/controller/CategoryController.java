@@ -11,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.geekbrains.persist.entity.Category;
-import ru.geekbrains.persist.entity.Product;
-import ru.geekbrains.persist.repo.*;
-import ru.geekbrains.persist.services.CategoryService;
+import ru.geekbrains.entity.Category;
+import ru.geekbrains.repo.*;
+import ru.geekbrains.services.CategoryService;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -45,10 +43,7 @@ public class CategoryController  {
                               @RequestParam("page") Optional<Integer> page,
                       @RequestParam("size") Optional<Integer> size       ) {
 
-
         logger.info("Filtering by name: {}", title);
-
-
 
 //                                                   с сорторовкой  по цене по возрастанию:
         PageRequest pageRequest = PageRequest.of(page.orElse(1) - 1, size.orElse(3),

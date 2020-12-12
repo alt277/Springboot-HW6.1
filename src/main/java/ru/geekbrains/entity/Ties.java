@@ -1,4 +1,4 @@
-package ru.geekbrains.persist.entity;
+package ru.geekbrains.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +45,9 @@ public class Ties {
         this.customerId = customer_id;
     }
 
-    public Integer getProductId() { return productId; }
+    public Integer getProductId() {
+        return productId;
+    }
 
     public void setProductId(Integer product_id) {
         this.productId = product_id;
