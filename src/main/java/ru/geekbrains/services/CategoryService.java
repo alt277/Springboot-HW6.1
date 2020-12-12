@@ -1,14 +1,11 @@
-package ru.geekbrains.persist.services;
+package ru.geekbrains.services;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.persist.entity.Product;
-import ru.geekbrains.persist.repo.CategoryRepository;
-
-import java.util.List;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.repo.CategoryRepository;
 
 @Service
 public class CategoryService {

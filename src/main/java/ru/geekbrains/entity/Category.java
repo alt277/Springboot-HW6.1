@@ -1,5 +1,8 @@
-package ru.geekbrains.persist.entity;
+package ru.geekbrains.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.geekbrains.entity.views.CategoryView;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,11 +12,13 @@ import java.util.List;
 public class Category {
 
     @Id
-    @Column (name = "id")
+    @Column(name = "id")
     @GeneratedValue
+    @JsonView(CategoryView.CategoryId.class)
     Integer id;
 
-    @Column(name="title")
+    @Column(name = "title")
+    @JsonView(CategoryView.WholeCategory.class)
     String title;
 
     @OneToMany(mappedBy = "category")

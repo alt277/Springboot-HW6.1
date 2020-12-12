@@ -1,13 +1,14 @@
-package ru.geekbrains.persist.services;
+package ru.geekbrains.services;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.persist.entity.Customer;
-import ru.geekbrains.persist.repo.CustomerRepo;
-import ru.geekbrains.persist.repo.CustomerRepository;
+
+import ru.geekbrains.entity.Customer;
+import ru.geekbrains.entity.Product;
+import ru.geekbrains.repo.CustomerRepo;
+import ru.geekbrains.repo.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -17,6 +18,9 @@ public class CustomerService {
     public CustomerService(CustomerRepository customerRepository, CustomerRepo customerRepo) {
         this.customerRepository = customerRepository;
         this.customerRepo = customerRepo;
+    }
+    public Customer findById(Integer id) {
+        return customerRepository.getById(id);
     }
     public List<Customer> findAll(){
         return customerRepository.findAll();
